@@ -20,3 +20,9 @@ library(usethis)
 create_package("applause")
 use_readme_md()
 ```
+
+Create a directory in `inst` to hold the applause button dependencies.
+
+```r
+dir.create("inst/applause-button", recursive = TRUE)
+```
