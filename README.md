@@ -81,3 +81,11 @@ To move the files where they need to be, run:
 ```sh
 npm run build
 ```
+
+### Create html_dependency_applause()
+
+Now we turn to building out the R package. First we depend on the [htmltools] package.
+
+```r
+use_package("htmltools")
+```
