@@ -4,11 +4,15 @@
   "description": "An R package to add applause-button to your web pages and Shiny apps.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy": "copyfiles -f \"node_modules/applause-button/dist/applause-button.*\" inst/applause-button",
+    "build": "npm run copy"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "applause-button": "^3.3.2"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.3.0"
   }
 }

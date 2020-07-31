@@ -47,4 +47,31 @@ This step will install `applause-button` and it's related dependencies into `nod
 use_build_ignore("package.json")
 use_build_ignore("package-lock.json")
 use_build_ignore("node_modules/")
+use_git_ignore("node_modules/")
+```
+
+Now we need to move the `applause-button` dependencies into our R package space. If you look inside `node_modules/` you'll find the `applause-button/` folder, which contains the library source and a `dist/` directory where the JavaScript and CSS dependencies are stored.
+We need to copy these files from `node_modules/applause-button/dist` to `inst/applause-button/`.
+
+I usually do this with `npm` so that it's handled by the JavaScript package manager and so that I don't forget to do this step. I use an npm package called `copyfiles`, which is added as a dev dependency.
+
+```sh
+npm install --save-dev copyfiles
+```
+
+Then I add the following to `package.json` in `"scripts"`.
+
+```json
+"scripts": {
+  "copy": "copyfiles -f \"node_modules/applause-button/dist/applause-button.*\" inst/applause-button",
+  "build": "npm run copy"
+}
+```
+
+This creates two [npm run scripts](https://docs.npmjs.com/cli/run-script), a script for the `copy` step and a script for the `build` step. The `build` step at the moment just calls the `copy` step, but if we later decide to add more build steps, this format lets us add on easily.
+
+To move the files where they need to be, run:
+
+```sh
+npm run build
 ```
