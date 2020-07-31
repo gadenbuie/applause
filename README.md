@@ -89,3 +89,39 @@ Now we turn to building out the R package. First we depend on the [htmltools] pa
 ```r
 use_package("htmltools")
 ```
+
+Then we create an `html_dependency_applause()` function in `R/html_dependency.R`.
+
+```r
+use_r("html_dependency")
+```
+
+The function looks like this:
+
+```r
+html_dependency_applause <- function() {
+  htmltools::htmlDependency(
+    name = "applause-button",
+    version = "3.3.2",
+    package = "applause",
+    src = "applause-button",
+    script = "applause-button.js",
+    stylesheet = "applause-button.css",
+    all_files = FALSE
+  )
+}
+```
+
+- The `name` of the dependency is `applause-button` because that's what it's called on npm, i.e. we ran `npm install applause-button`.
+
+- The `version` installed from npm was 3.3.2 (if we update the package later, we'll need to update this function).
+
+- The R `package` providing the dependency is called `applause`
+
+- The `src` directory where the files are located is `applause-button`, corresponding to `inst/applause-button` (the files in `inst/` are installed in the package root directory when the package is installed.)
+
+- The `script` to be loaded is `applause-button.js`
+
+- The `stylesheet` to be loaded is `applause-button.css`
+
+- And just for safety, we set `all_files = FALSE` so that other files in this folder are included when the dependency is used.
