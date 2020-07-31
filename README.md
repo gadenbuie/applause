@@ -135,3 +135,38 @@ src = c(
 )
 ```
 
+### Create UI functions the provide the HTML
+
+The [applause-button] documentation page includes a section showing the HTML required to include an Applause button on your web page:
+
+```html
+<head>
+  <!-- add the button style & script -->
+  <link rel="stylesheet" href="applause-button.css" />
+  <script src="applause-button.js"></script>
+</head>
+<body>
+  <!-- add the button! -->
+  <applause-button style="width: 58px; height: 58px;"/>
+</body>  
+```
+
+The HTML dependency function we created above will provide htmltools with enough information to create the `<link>` and `<script>` tags that need to be included in the `<head>` of the page. Our next task is to provide a function that creates the HTML that appears in the page and to attach the `html_dependency_applause()` to that HTML.
+
+The Applause button provides an interesting wrinkle at this step. Rather than using a classed `<div>`, the button uses a custom HTML tag: `<applause-button>`. So the first step is to create an appropriate tag. Again, from the [documentation], this tag can have the following attributes:
+
+- `color`, with a CSS color for the button
+- `multiclap`, a binary attribute that when `"true"` allows users to clap more than once
+- `url`, the URL used to track total claps, if unset the current referring page URL will be used
+- `api`, a URL for a custom Applause button back-end API.
+
+```r
+use_r("button")
+```
+
+Following the above, I created a `button()` function that returns the custom element.
+
+```r
+applause::button(color = "red", width = "33px")
+## <applause-button style="width: 33px; height: 33px;" color="red"></applause-button>
+```
