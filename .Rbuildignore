@@ -1,2 +1,5 @@
 ^applause\.Rproj$
 ^\.Rproj\.user$
+^package\.json$
+^package-lock\.json$
+^node_modules$

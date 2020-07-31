@@ -34,3 +34,17 @@ In a terminal, initialize an [npm] project in the package root to create a `pack
 # In terminal, hit enter to accept most defaults, or change what you want
 npm init
 ```
+
+Use `npm` to install the [applause-button] dependencies.
+
+```sh
+npm install applause-button
+```
+
+This step will install `applause-button` and it's related dependencies into `node_modules/`. It will also create a `package-lock.json` file that should be committed alongside `package.json`, but we don't want to commit the dependencies yet. In fact, we add those to build and git ignore files.
+
+```r
+use_build_ignore("package.json")
+use_build_ignore("package-lock.json")
+use_build_ignore("node_modules/")
+```
