@@ -1,17 +1,24 @@
 Package: applause
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Zero-Configuration Button for Adding Applause/Claps/Kudos
+    to Web Pages
+Version: 0.0.1
 Authors@R: 
-    person(given = "Garrick",
-           family = "Aden-Buie",
-           role = c("aut", "cre"),
-           email = "garrick@adenbuie.com",
-           comment = c(ORCID = "0000-0002-7111-0077"))
-Description: What the package does (one paragraph).
+    c(person(given = "Garrick",
+             family = "Aden-Buie",
+             role = c("aut", "cre"),
+             email = "garrick@adenbuie.com",
+             comment = c(ORCID = "0000-0002-7111-0077")),
+      person(given = "Colin",
+             family = "Eberhardt",
+             role = "ctb",
+             comment = "Author of applause-button"))
+Description: A zero-configuration custom element that adds an
+    applause/claps/kudos button to 'R Markdown' pages, 'Shiny' apps,
+    'blogdown' pages, and more.
 License: MIT + file LICENSE
+Imports: 
+    htmltools
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports: 
-    htmltools
