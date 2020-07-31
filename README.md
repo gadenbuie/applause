@@ -164,9 +164,20 @@ The Applause button provides an interesting wrinkle at this step. Rather than us
 use_r("button")
 ```
 
-Following the above, I created a `button()` function that returns the custom element.
+Following the above, I created a [`button()` function](https://github.com/gadenbuie/applause/blob/5f68db6d95ef8585d627b50ac8f1eb3eeaaf94c4/R/button.R) that returns the custom element.
 
 ```r
 applause::button(color = "red", width = "33px")
 ## <applause-button style="width: 33px; height: 33px;" color="red"></applause-button>
 ```
+
+The applause button at this point returns just the custom HTML tag, but doesn't include the dependencies. To include the applause button dependencies, we need to "attach" the `html_dependency_applause()` to the tag. The easiest way to do this is to return an `htmltools::tagList()` containing the HTML tags and the dependencies:
+
+```r
+htmltools::tagList(
+  button(),
+  html_dependency_applause()
+)
+```
+
+(Sidenote: at this point I'm beginning to question calling the function `button()`, but I think it's okay. This package will have only two exposed functions, and I'll recommend that most people call the fully qualified function name: `applause::button()`.)

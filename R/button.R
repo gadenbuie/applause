@@ -59,5 +59,8 @@ button <- function(
     api = url_api
   )
 
-  htmltools::tag("applause-button", tag_attrs)
+  htmltools::tagList(
+    htmltools::tag("applause-button", tag_attrs),
+    html_dependency_applause()
+  )
 }

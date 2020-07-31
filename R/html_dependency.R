@@ -1,3 +1,4 @@
+#' @describeIn button The applause button HTML dependency
 #' @export
 html_dependency_applause <- function() {
   htmltools::htmlDependency(
