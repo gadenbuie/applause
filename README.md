@@ -13,6 +13,17 @@ Add an _applause button_ to your web pages, blog posts, and Shiny apps. Based en
 
 The other goal of this project is to demonstrate how to use HTML dependencies with the [htmltools] package.
 
+## Installation
+
+```r
+# install.packages("remotes")
+
+remotes::install_github("gadenbuie/applause")
+```
+
+## Demonstration and Usage
+
+[See `applause::button()` in action](https://gadenbuie.github.io/applause).
 
 ## Dev Log
 
@@ -181,3 +192,11 @@ htmltools::tagList(
 ```
 
 (Sidenote: at this point I'm beginning to question calling the function `button()`, but I think it's okay. This package will have only two exposed functions, and I'll recommend that most people call the fully qualified function name: `applause::button()`.)
+
+### That's it!
+
+The package now provides an HTML dependency and a custom Applause button component that can be dropped into an R Markdown document, a blogdown page, a Shiny app, or a xaringan presentation.
+
+The last step is to add a demonstration page and to update the README!
+
+👏 👏 👏
