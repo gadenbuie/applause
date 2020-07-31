@@ -4,7 +4,10 @@ html_dependency_applause <- function() {
     name = "applause-button",
     version = "3.3.2",
     package = "applause",
-    src = "applause-button",
+    src = c(
+      file = "applause-button",
+      href = "https://unpkg.com/applause-button@3.3.2/dist"
+    ),
     script = "applause-button.js",
     stylesheet = "applause-button.css",
     all_files = FALSE

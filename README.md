@@ -125,3 +125,13 @@ html_dependency_applause <- function() {
 - The `stylesheet` to be loaded is `applause-button.css`
 
 - And just for safety, we set `all_files = FALSE` so that other files in this folder are included when the dependency is used.
+
+The Applause button distribution files are also available via the unpkg CDN, so I updated `src` to include the URL to the directory containing the files. To specify both the local and remote locations of the distribution files, `src` in `htmlDependency()` accepts a named character vector, where the `file` item corresponds to the local path and the `href` item corresponds to the remote URL.
+
+```r
+src = c(
+  file = "applause-button",
+  href = "https://unpkg.com/applause-button@3.3.2/dist"
+)
+```
+
