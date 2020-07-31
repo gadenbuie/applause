@@ -16,6 +16,8 @@ The other goal of this project is to demonstrate how to use HTML dependencies wi
 
 ## Dev Log
 
+### Package Init
+
 ```r
 library(usethis)
 create_package("applause")
@@ -27,6 +29,8 @@ Create a directory in `inst` to hold the applause button dependencies.
 ```r
 dir.create("inst/applause-button", recursive = TRUE)
 ```
+
+### Setup npm to import the JavaScript package
 
 In a terminal, initialize an [npm] project in the package root to create a `package.json`. There are a few ways this can be done, but I prefer to have `package.json` and `npm` manage the JavaScript dependency.
 
@@ -49,6 +53,8 @@ use_build_ignore("package-lock.json")
 use_build_ignore("node_modules/")
 use_git_ignore("node_modules/")
 ```
+
+### Move the JavaScript dependencies into the R package
 
 Now we need to move the `applause-button` dependencies into our R package space. If you look inside `node_modules/` you'll find the `applause-button/` folder, which contains the library source and a `dist/` directory where the JavaScript and CSS dependencies are stored.
 We need to copy these files from `node_modules/applause-button/dist` to `inst/applause-button/`.
