@@ -17,17 +17,24 @@ The other goal of this project is to demonstrate how to use HTML dependencies wi
 
 ```r
 # install.packages("remotes")
-
 remotes::install_github("gadenbuie/applause")
 ```
 
 ## Demonstration and Usage
 
-[See `applause::button()` in action](https://gadenbuie.github.io/applause).
+Skip `library()` and just add an applause button wherever you want one with
+
+```r
+applause::button()
+```
+
+[Check out the documentation](https://gadenbuie.github.io/applause) to see `applause::button()` in action and for [additional options](https://gadenbuie.github.io/applause/#options).
 
 ## Dev Log
 
 ### Package Init
+
+[&#x1F4D1; Initial commit: d92bd3](https://github.com/gadenbuie/applause/commit/d92bd3780221d29a097046156660757aaf361442)
 
 ```r
 library(usethis)
@@ -35,7 +42,8 @@ create_package("applause")
 use_readme_md()
 ```
 
-Create a directory in `inst` to hold the applause button dependencies.
+Create a directory in `inst` to hold the applause button dependencies. [&#x1F4D1; Changes: 8ee9f3](https://github.com/gadenbuie/applause/commit/8ee9f38d12f88b90ddd8159c4f504a72312eb9dd)
+
 
 ```r
 dir.create("inst/applause-button", recursive = TRUE)
@@ -43,14 +51,16 @@ dir.create("inst/applause-button", recursive = TRUE)
 
 ### Setup npm to import the JavaScript package
 
-In a terminal, initialize an [npm] project in the package root to create a `package.json`. There are a few ways this can be done, but I prefer to have `package.json` and `npm` manage the JavaScript dependency.
+In a terminal, initialize an [npm] project in the package root to create a `package.json`. There are a few ways this can be done, but I prefer to have `package.json` and `npm` manage the JavaScript dependency. [&#x1F4D1; Changes: db0201](https://github.com/gadenbuie/applause/commit/db0201b5e4fa86c7a4cd82493863fadf860f684b)
+
 
 ```sh
 # In terminal, hit enter to accept most defaults, or change what you want
 npm init
 ```
 
-Use `npm` to install the [applause-button] dependencies.
+Use `npm` to install the [applause-button] dependencies. [&#x1F4D1; Changes: 90eb14](https://github.com/gadenbuie/applause/commit/90eb149a1daeea96f8cedde70e97b8c874d5bf20)
+
 
 ```sh
 npm install applause-button
@@ -66,6 +76,9 @@ use_git_ignore("node_modules/")
 ```
 
 ### Move the JavaScript dependencies into the R package
+
+[&#x1F4D1; Changes: 9c5500](https://github.com/gadenbuie/applause/commit/9c5500846f228b5a0af4a0e835f2250841d6b9ce)
+
 
 Now we need to move the `applause-button` dependencies into our R package space. If you look inside `node_modules/` you'll find the `applause-button/` folder, which contains the library source and a `dist/` directory where the JavaScript and CSS dependencies are stored.
 We need to copy these files from `node_modules/applause-button/dist` to `inst/applause-button/`.
@@ -95,13 +108,15 @@ npm run build
 
 ### Create html_dependency_applause()
 
-Now we turn to building out the R package. First we depend on the [htmltools] package.
+Now we turn to building out the R package. First we depend on the [htmltools] package. [&#x1F4D1; Changes: a9fbf4](https://github.com/gadenbuie/applause/commit/a9fbf490448f77deb604f48f80f8cd6fbc1159ff)
+
 
 ```r
 use_package("htmltools")
 ```
 
-Then we create an `html_dependency_applause()` function in `R/html_dependency.R`.
+Then we create an `html_dependency_applause()` function in `R/html_dependency.R`. [&#x1F4D1; Changes: 453694](https://github.com/gadenbuie/applause/commit/4536941dc9a3d39b14349ba9e38b3a5b8ba7d391)
+
 
 ```r
 use_r("html_dependency")
@@ -137,7 +152,8 @@ html_dependency_applause <- function() {
 
 - And just for safety, we set `all_files = FALSE` so that other files in this folder are included when the dependency is used.
 
-The Applause button distribution files are also available via the unpkg CDN, so I updated `src` to include the URL to the directory containing the files. To specify both the local and remote locations of the distribution files, `src` in `htmlDependency()` accepts a named character vector, where the `file` item corresponds to the local path and the `href` item corresponds to the remote URL.
+The Applause button distribution files are also available via the unpkg CDN, so I updated `src` to include the URL to the directory containing the files. To specify both the local and remote locations of the distribution files, `src` in `htmlDependency()` accepts a named character vector, where the `file` item corresponds to the local path and the `href` item corresponds to the remote URL. [&#x1F4D1; Changes: 73d56a](https://github.com/gadenbuie/applause/commit/73d56a5d3856c7319367149cc432a1ac1e0215c0)
+
 
 ```r
 src = c(
@@ -147,6 +163,9 @@ src = c(
 ```
 
 ### Create UI functions the provide the HTML
+
+[&#x1F4D1; Changes: 5f68db](https://github.com/gadenbuie/applause/commit/5f68db6d95ef8585d627b50ac8f1eb3eeaaf94c4)
+
 
 The [applause-button] documentation page includes a section showing the HTML required to include an Applause button on your web page:
 
@@ -191,12 +210,15 @@ htmltools::tagList(
 )
 ```
 
+[&#x1F4D1; Changes: 669d57](https://github.com/gadenbuie/applause/commit/669d573df07f9d1123e5987d9d32c34e7285e61e)
+
+
 (Sidenote: at this point I'm beginning to question calling the function `button()`, but I think it's okay. This package will have only two exposed functions, and I'll recommend that most people call the fully qualified function name: `applause::button()`.)
 
 ### That's it!
 
 The package now provides an HTML dependency and a custom Applause button component that can be dropped into an R Markdown document, a blogdown page, a Shiny app, or a xaringan presentation.
 
-The last step is to add a demonstration page and to update the README!
+The last step is to [fill out the DESCRIPTION](https://github.com/gadenbuie/applause/commit/caa9c883ab639cb2086290350d611b4e747e464f) and [add a demonstration page and update the README](https://github.com/gadenbuie/applause/commit/a8b282eaf9dc9b347770342326329b1c1b993059)!
 
 👏 👏 👏
